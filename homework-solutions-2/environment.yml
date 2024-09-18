@@ -1,0 +1,17 @@
+name: cppdev
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - cmake
+  - ninja
+  - make
+  #- gxx doesnt work for my computer
+  - clangxx
+  - clangxx_osx-64
+  - doxygen
+  - pip
+  - pip:
+    - breathe
+    - sphinx
