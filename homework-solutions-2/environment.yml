@@ -7,9 +7,8 @@ dependencies:
   - cmake
   - ninja
   - make
-  #- gxx doesnt work for my computer
-  - clangxx
-  - clangxx_osx-64
+  #- gxx doesnt work for mac apple silicon
+  - clangxx # added clangxx instead
   - doxygen
   - pip
   - pip:
