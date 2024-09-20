@@ -2,3 +2,5 @@
 build/
 a.out
 *.o
+*.zip
+*.DS_Store
