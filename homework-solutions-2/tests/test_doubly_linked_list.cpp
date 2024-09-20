@@ -49,23 +49,39 @@ TEST(EraseTest, StringTest) {
 
 
 TEST(AddTest, StringTest) {
-    Node* node = create_node("Apple");
-    node = insert(node, create_node("Banana"));
-    node = insert(node, create_node("Cherry"));
+    Node* head = create_node("Apple");
+    head = insert(head, create_node("Banana"));
 
-    Node* new_node = create_node("Date");
-    node = add(node->next, new_node); // Add "Date" after "Banana"
+    Node* temp = add(head, create_node("Cherry"));
 
-    Node* current = node;
-    EXPECT_EQ(current->val, "Cherry");
-    current = current->next;
-    EXPECT_EQ(current->val, "Date");
-    EXPECT_EQ(current->next->val, "Apple");
-    EXPECT_EQ(current->prev->val, "Banana");
+    // * Banana -> Cherry -> Apple
 
-    while(node != nullptr) {
-        Node* temp = node;
-        node = node->next;
+    EXPECT_EQ(head->val, "Banana");
+    EXPECT_EQ(head->next->val, "Cherry");
+    EXPECT_EQ(head->next->next->val, "Apple");
+    EXPECT_EQ(head->prev, nullptr);
+
+    temp = head; // temp->val = "Banana"
+
+    head = insert(head, create_node("Orange"));
+    // * Orange -> Banana -> Cherry -> Apple
+
+    temp = add(temp, create_node("Kiwi")); // adding next to Cherry
+    // * Orange -> Banana -> Kiwi -> Cherry -> Apple
+
+    EXPECT_EQ(head->val, "Orange");
+    EXPECT_EQ(head->next->val, "Banana");
+    EXPECT_EQ(head->next->next->val, "Kiwi");
+    EXPECT_EQ(head->prev, nullptr);
+
+    EXPECT_EQ(temp->val, "Kiwi");
+    EXPECT_EQ(temp->next->val, "Cherry");
+    EXPECT_EQ(temp->prev->val, "Banana");
+
+    while (head != nullptr) {
+        Node* temp = head;
+        head = head->next;
         delete temp;
     }
+
 }

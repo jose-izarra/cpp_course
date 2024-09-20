@@ -54,17 +54,27 @@ namespace dbl {
         return next_node;
     }
 
-    // adds a node after a given one
     Node* add(Node* p, Node* n)
     {
+        if (n == nullptr) {
+            return nullptr;
+        }
+
+
         if (p == nullptr) {
+            // If the given node is null, new_node becomes the first and only node
+            n->next = nullptr;
+            n->prev = nullptr;
             return n;
         }
+
         n->next = p->next;
         n->prev = p;
+        // if p is not the last node
         if (p->next != nullptr) {
             p->next->prev = n;
         }
+
         p->next = n;
         return n;
     }
