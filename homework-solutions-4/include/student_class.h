@@ -131,6 +131,9 @@ namespace student_class
 
     int Student::student_count = 0;
 
+
+    // when redefining this, an error is thrown
+
     // void Student::printInfo() const{
     //     std::cout << "Name: " << this->name << std::endl;
     //     std::cout << "Age: " << this->age << std::endl;
