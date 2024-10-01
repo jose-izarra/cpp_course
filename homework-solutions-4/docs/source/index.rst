@@ -1,16 +1,18 @@
+|project| documentation
+===================================
 
+Welcome to the landing page!
 
-CPP Homework 4 Documentation
-=======================================
+A section
+----------
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+.. doxygennamespace:: oop
+.. doxygennamespace:: student_class
 
-:ref:`genindex`
 
 Docs
 ====
 
-.. doxygenstruct:: homework
-   :members:
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:

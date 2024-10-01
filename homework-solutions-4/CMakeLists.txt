@@ -1,3 +1,4 @@
+# /CMakeLists.txt
 # Every CMake project needs to start with these two lines
 cmake_minimum_required(VERSION 3.28) # This is the minimum version of CMake required
 project(Homework VERSION 1.0) # This is the name of the project and its version
@@ -13,6 +14,45 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # We place the libraries in the lib directory
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+
+
+
+# Doxygen setup
+find_package(Doxygen REQUIRED)
+if (DOXYGEN_FOUND)
+    # Configure Doxyfile
+    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
+    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+
+    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+
+    # Add custom target for Doxygen
+    add_custom_target(doc_doxygen
+        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating API documentation with Doxygen"
+        VERBATIM)
+endif()
+
+message(STATUS "CMAKE_CURRENT_SOURCE_DIR in root= ${CMAKE_CURRENT_SOURCE_DIR}")
+message(STATUS "CMAKE_CURRENT_BINARY_DIR in root= ${CMAKE_CURRENT_BINARY_DIR}")
+message(STATUS "SPHINX_EXECUTABLE in root= ${SPHINX_EXECUTABLE}")
+
+# # Sphinx setup
+# find_program(SPHINX_EXECUTABLE sphinx-build)
+# if (SPHINX_EXECUTABLE)
+#     add_custom_target(doc_sphinx
+#         COMMAND ${SPHINX_EXECUTABLE} -b html docs/source docs/build
+#         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/docs
+#         COMMENT "Generating HTML documentation with Sphinx"
+#         VERBATIM)
+# endif()
+
+# Optionally create an overall `doc` target to build both:
+# add_custom_target(doc ALL DEPENDS doc_doxygen doc_sphinx)
+
+
 
 # We normally have a CMakeLists.txt file in each directory that has something that needs to be built
 add_subdirectory(src)

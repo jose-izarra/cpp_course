@@ -40,7 +40,7 @@ TEST(DynamicArrayTest, MoveConstructorTest) {
     DynamicArray b(std::move(a)); // Move constructor
 
     EXPECT_EQ(a.size(), 0);
-    EXPECT_EQ(a[0], 0);
+
     EXPECT_EQ(b.size(), 10);
     EXPECT_EQ(b[0], 1);
 }

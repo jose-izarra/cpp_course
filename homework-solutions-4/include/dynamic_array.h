@@ -7,27 +7,23 @@
 namespace oop
 {
 
-
-    /*
-        to navigate and keep track of the state of the dynamic array we need a pointer and its size
-        - the pointer pointing to the beginning of the array
-        - size holds the amount of numbers in the array
-
-        This will help us access its items and populate the array directly in memory
-    */
     class DynamicArray
     {
+
         private:
-            int* ptr;   // pointer
-            int a_size;   // array size
+            int* ptr;  ///< Pointer to the array
+            int a_size;   ///< Size of the array
         public:
 
-            // returns the size of the array
+            /**
+             * @brief Gets the size of the array.
+             * @return The size of the array.
+             */
             int size() {
                 return this->a_size;
             }
 
-            // Default Constructor
+
             DynamicArray() {
                 this->a_size = 0;
                 this->ptr = nullptr;
@@ -121,109 +117,5 @@ namespace oop
                 }
                 return os;
             }
-
-
     };
 };
-
-/*
-
-Copy constructor
-            DynamicArray(const DynamicArray& other) {
-                this->array_size = other.array_size;
-                this->ptr_array = new int[this->array_size];
-                for (int i = 0; i < this->array_size; i++) {
-                    this->ptr_array[i] = other.ptr_array[i];
-                }
-            };
-
-            // Move constructor
-            DynamicArray(DynamicArray&& other) {
-                this->array_size = other.array_size;
-                this->ptr_array = other.ptr_array;
-                other.ptr_array = nullptr;
-                other.array_size = 0;
-            };
-
-
-            // Add operator
-            DynamicArray operator+(const DynamicArray& other) {
-                DynamicArray new_array;
-                new_array.array_size = this->array_size + other.array_size;
-                new_array.ptr_array = new int[new_array.array_size];
-                for (int i = 0; i < this->array_size; i++) {
-                    new_array.ptr_array[i] = this->ptr_array[i];
-                }
-                for (int i = 0; i < other.array_size; i++) {
-                    new_array.ptr_array[this->array_size + i] = other.ptr_array[i];
-                }
-
-
-                return new_array;
-            };
-
-            // allows for array indexing
-            int& operator[](int index) {
-                return this->ptr_array[index];
-            };
-
-            // Comparison operators
-            bool operator==(const DynamicArray& other) {
-                if (this->array_size != other.array_size) {
-                    return false;
-                }
-                for (int i = 0; i < this->array_size; i++) {
-                    if (this->ptr_array[i] != other.ptr_array[i]) {
-                        return false;
-                    }
-                }
-                return true;
-            };
-
-            // Inequality operator
-            bool operator!=(const DynamicArray& other) {
-                return !(*this == other);
-            };
-
-            // Stream insertion operator
-            friend std::ostream& operator<<(std::ostream& os, const DynamicArray& arr) {
-                for (int i = 0; i < arr.array_size; i++) {
-                    os << arr.ptr_array[i] << " ";
-                }
-                return os;
-            }
-
-            // Copy assingment operator
-            DynamicArray& operator=(const DynamicArray& other) {
-                if (this == &other) {
-                    return *this;
-                }
-                this->array_size = other.array_size;
-                this->ptr_array = new int[this->array_size];
-                for (int i = 0; i < this->array_size; i++) {
-                    this->ptr_array[i] = other.ptr_array[i];
-                }
-                return *this;
-            };
-
-            // Move assignment constructor
-            DynamicArray (DynamicArray& other): array_size(other.array_size), ptr_array(other.ptr_array) {
-                other.array_size = 0;
-                other.ptr_array = nullptr;
-            }
-
-
-            // Move assignment operator
-            DynamicArray& operator=(DynamicArray&& other) noexcept {
-                if (this != &other) {
-                    ptr_array = other.ptr_array;
-                    array_size = other.array_size;
-                    other.ptr_array = nullptr;
-                    other.array_size = 0;
-                }
-
-                return *this;
-            };
-
-
-*/

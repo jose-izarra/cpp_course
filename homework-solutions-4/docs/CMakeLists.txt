@@ -36,13 +36,26 @@ add_custom_target(Doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
 # Add a custom target to generate the documentation with Sphinx
 set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/source)
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/sphinx)
+
+# add_custom_target(doc_sphinx
+#     COMMAND ${SPHINX_EXECUTABLE} -b html ${CMAKE_SOURCE_DIR}/docs/source ${CMAKE_SOURCE_DIR}/docs/build
+#     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/docs
+#     COMMENT "Generating HTML documentation with Sphinx"
+#     VERBATIM)
+
+message(STATUS "SPHINX_SOURCE in docs= ${SPHINX_SOURCE}")
+message(STATUS "SPHINX_BUILD in docs = ${SPHINX_BUILD}")
+# CMAKE_CURRENT_BINARY_DIR = homework-solutions-4/build/docs
+# CMAKE_CURRENT_SOURCE_DIR = homework-solutions-4/docs
+
+
 add_custom_target(Sphinx ALL
                   COMMAND
                   ${CMAKE_COMMAND} -E env
-		  AUTHOR_NAME=${PROJECT_AUTHOR}
-		  PROJECT_NAME=${PROJECT_NAME}
-		  sphinx-build -b html
-		  -D breathe_projects.${PROJECT_NAME}=${DOXYGEN_OUTPUT_DIR}/xml
+                    AUTHOR_NAME=${PROJECT_AUTHOR}
+                    PROJECT_NAME=${PROJECT_NAME}
+                    sphinx-build -b html
+		            -D breathe_projects.${PROJECT_NAME}=${DOXYGEN_OUTPUT_DIR}/xml
                   ${SPHINX_SOURCE} ${SPHINX_BUILD}
                   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                   COMMENT "Generating documentation with Sphinx"

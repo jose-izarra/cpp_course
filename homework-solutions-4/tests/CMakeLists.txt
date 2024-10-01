@@ -1,3 +1,4 @@
+# /tests/CMakeLists.txt
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -18,7 +19,12 @@ link_libraries(GTest::gtest_main)
 
 add_executable(test_student test_student.cpp) # Compile a test source
 add_executable(test_dynamic_array test_dynamic_array.cpp)
+
+
 # Link against any required libraries. The library "some_library" is compiled in src/
 target_link_libraries(test_student student_class)
 target_link_libraries(test_dynamic_array dynamic_array)
-gtest_discover_tests(test_student test_dynamic_array)            # Register the tests to gtest
+
+
+gtest_discover_tests(test_student)            # Register the tests to gtest
+gtest_discover_tests(test_dynamic_array)      # Register the tests to gtest
