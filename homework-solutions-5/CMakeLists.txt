@@ -1,3 +1,4 @@
+
 # /CMakeLists.txt
 # Every CMake project needs to start with these two lines
 cmake_minimum_required(VERSION 3.28) # This is the minimum version of CMake required
@@ -14,7 +15,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # We place the libraries in the lib directory
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-
 
 
 
@@ -35,13 +35,9 @@ if (DOXYGEN_FOUND)
         VERBATIM)
 endif()
 
-message(STATUS "CMAKE_CURRENT_SOURCE_DIR in root= ${CMAKE_CURRENT_SOURCE_DIR}")
-message(STATUS "CMAKE_CURRENT_BINARY_DIR in root= ${CMAKE_CURRENT_BINARY_DIR}")
-message(STATUS "SPHINX_EXECUTABLE in root= ${SPHINX_EXECUTABLE}")
-
 
 # We normally have a CMakeLists.txt file in each directory that has something that needs to be built
 add_subdirectory(src)
 enable_testing() # This line allows to call ctest after compilation
 add_subdirectory(tests)
-add_subdirectory(docs)
+# add_subdirectory(docs)
