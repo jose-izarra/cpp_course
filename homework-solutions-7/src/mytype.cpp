@@ -43,13 +43,3 @@ namespace homework {
         return mt;
     }
 }
-
-
-
-
-int main() {
-    homework::MyType mt(42,3.14);
-    homework::writeToFile(mt,"mytype.txt");
-    auto mt2 = homework::readFromFile("mytype.txt");
-    return 0;
-}

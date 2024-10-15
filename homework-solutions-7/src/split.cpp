@@ -32,18 +32,3 @@ namespace homework {
         return result;
     }
 }
-
-
-
-int main() {
-
-    std::vector<std::string> res = homework::split(" hello world lorem ipsum ");
-
-    std::cout << "Vector content:" << std::endl;
-    for (std::string i: res) {
-        std::cout << i << ' ';
-    }
-    std::cout << std::endl;
-
-    return 0;
-}
