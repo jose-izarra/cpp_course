@@ -67,8 +67,6 @@ TEST(SumVector, CustomType){
 
     };
     std::vector<MyType> vmt = {{1, 1.1}, {2, 2.2}, {3, 3.3}};
-
-
     auto sum_mts = sum_elements(vmt, MyType{0, 0.0});
     ASSERT_EQ(sum_mts, (MyType{6, 6.6}) );
 }
