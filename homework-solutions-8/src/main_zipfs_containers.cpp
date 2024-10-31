@@ -5,11 +5,11 @@
 #include <sstream>
 #include <map>
 #include <set>
-// #include "zipfs.h"
+#include "zipfs.h"
 
 
-namespace zipfs {
-    std::vector<char> readBook(std::string fileName) {
+namespace zipfs_containers {
+    std::vector<char> readBook(const std::string& fileName) {
         std::ifstream f(fileName);
         char c;
         std::vector<char> v;
@@ -31,14 +31,8 @@ namespace zipfs {
         std::istringstream ss(s);
         std::string word;
 
-        while (ss) {
-            ss >> word;
-
-            if (m.contains(word)) {
-                m[word]++;
-            } else {
-                m.insert({word, 1});
-            }
+        while (ss >> word) {
+            m[word]++;
         }
 
         return m;
@@ -79,11 +73,6 @@ namespace zipfs {
             f << rank << " " << freq << " " << word << "\n";
             rank++;
         }
-
-        // for (auto it = m.begin(); it != m.end(); it++) {
-            // f << rank << " " << it->first << " " << it->second << "\n";
-            // rank++;
-        // }
     }
 
     void printHapaxLegomenon(const std::multimap<int, std::string, std::greater<>>& m) {
@@ -111,14 +100,14 @@ namespace zipfs {
 
 int main() {
 
-    auto v = zipfs::readBook("pg2701.txt");
+    auto v = zipfs_containers::readBook("../pg2701.txt");
     /* these can be commented out to see the content inside each of the variables
     std::cout << "Contents of the file" << std::endl;
     for (char &c: v) {
         std::cout << c;
     }
     */
-    auto f = zipfs::computeWordFrequency(v);
+    auto f = zipfs_containers::computeWordFrequency(v);
     /*
     std::cout << "Word Frequency: " << std::endl;
     for (auto const& w: f) {
@@ -129,10 +118,10 @@ int main() {
     }
     */
 
-    int u = zipfs::countUniqueWords(v);
+    int u = zipfs_containers::countUniqueWords(v);
     std::cout << "Number of unique words: " << u << std::endl;
 
-    auto multi = zipfs::sortFrequencies(f);
+    auto multi = zipfs_containers::sortFrequencies(f);
     /*
     for (auto const& i: multi) {
         std::cout << i.first  // frequency (key)
@@ -142,16 +131,15 @@ int main() {
     }
     */
 
-    zipfs::writeFrequencyToFile(multi, "frequency.txt");
-    zipfs::printHapaxLegomenon(multi);
+    zipfs_containers::writeFrequencyToFile(multi, "../frequency.txt");
+    zipfs_containers::printHapaxLegomenon(multi);
 
     // do the same for the other text
-    auto old_text = zipfs::readBook("old_text.txt"); // first 5 pages of el principito in spanish
-    auto frequencies = zipfs::computeWordFrequency(old_text);
-    auto multimap = zipfs::sortFrequencies(frequencies);
-    zipfs::writeFrequencyToFile(multimap, "frequency_old_text.txt");
-    zipfs::printHapaxLegomenon(multimap);
+    auto v2 = zipfs_containers::readBook("../old_text.txt"); // first 5 pages of el principito in spanish
+    auto f2 = zipfs_containers::computeWordFrequency(v2);
+    auto multi2 = zipfs_containers::sortFrequencies(f2);
+    zipfs_containers::writeFrequencyToFile(multi2, "../frequency_old_text.txt");
+    zipfs_containers::printHapaxLegomenon(multi2);
 
     return 0;
-
 }
